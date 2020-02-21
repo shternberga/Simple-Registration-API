@@ -5,7 +5,7 @@ class Database
 {
     // specify database credentials
     private $host = "localhost";
-    private $db_name = "LOGIN_SIGNIN_VUE";
+    private $db_name = "LOGIN_SIGNIN";
     private $username = "root";
     private $password = "password";
     public $conn;
