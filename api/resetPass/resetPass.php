@@ -1,5 +1,5 @@
 <?php
-$redirectLocation = '/reset_pass';
+$redirectLocation = '/resetPass';
 
 if (!empty($_POST["new_password"])) {
 
@@ -19,12 +19,12 @@ if (!empty($_POST["new_password"])) {
 
         // check email in database
         $userManager = new UserManager($db);
-        if ($userManager->emailExists($email)) {
+        if ($user = $userManager->emailExists($email)) {
 
             // update password
             if ($userManager->resetPassword($password)) {
 
-                //save user in session
+                //save $ysuser in session
                 $_SESSION['user'] = $userManager->getUser()->name();
 
                 //send confirmation email

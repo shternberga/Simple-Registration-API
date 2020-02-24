@@ -1,10 +1,3 @@
-<?php
-//make global array variable $_SESSION available
-session_start();
-include_once 'layouts/header.php';
-include_once 'layouts/navbar.php';
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +9,7 @@ include_once 'layouts/navbar.php';
 <div class="container login-container">
     <div class="row">
         <div class="col-md-6 login-form">
-            <form class="login-form" action="/reset_pass" method="post" onSubmit="return validatePasswords();">
+            <form class="login-form" action="/resetPass" method="post" onSubmit="return validatePasswords();">
                 <h2 class="form-title">New password</h2>
                 <!-- form error messages -->
                 <?php if ($_SESSION["errorMessage"]): ?>
@@ -73,7 +66,3 @@ include_once 'layouts/navbar.php';
         return valid;
     }
 </script>
-
-<?php
-include_once 'layouts/footer.php';
-?>

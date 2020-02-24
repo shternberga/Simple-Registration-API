@@ -22,7 +22,7 @@ if (!empty($_POST["login"])) {
         $userManager = new UserManager($db);
 
         // check user if exists and if exists verify password
-        if ($userManager->emailExists($email) &&
+        if ($userManager->getUser($email) &&
             password_verify(strip_tags($password), $userManager->getUser()->password())) {
 
             //save user email and name to session

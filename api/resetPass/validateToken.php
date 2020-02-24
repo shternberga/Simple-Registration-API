@@ -1,6 +1,6 @@
 <?php
 //save redirect path to new password form
-$redirectLocation = '/reset_pass';
+$redirectLocation = '/resetPass';
 
 if (!empty($_GET["token"])) {
     // make database connection./

@@ -33,7 +33,7 @@ Route::add('/logout', function () {
 // Sign up form
 Route::add('/signup', function () {
     if (!isset($_SESSION["user"]))
-        require 'views/auth/sign_up.php';
+        require 'views/auth/signUp.php';
     else require 'views/home.php';
 }, 'get');
 // Sign up post request
@@ -43,34 +43,34 @@ Route::add('/signup', function () {
 // Only for registered users
 Route::add('/notforall', function () {
     if (isset($_SESSION["user"]))
-        require 'views/not_for_all.php';
+        require 'views/notForAll.php';
     else require 'views/home.php';
 }, 'get');
 // Show email for reset form
 Route::add('/mail', function () {
     if (!isset($_SESSION["user"]))
-        require 'views/reset_pass/mail.php';
+        require 'views/resetPass/mail.php';
     else require 'views/home.php';
 }, 'get');
 // Mail link to user
 Route::add('/maillink', function () {
-    require 'api/reset_pass/mailLink.php';
+    require 'api/resetPass/mailLink.php';
 }, 'post');
 // Check token before reset form
 Route::add('/reset', function () {
-    require 'api/reset_pass/validateToken.php';
+    require 'api/resetPass/validateToken.php';
 }, 'get');
 // Reset mail sent confirm page
 Route::add('/confirm', function () {
-    require 'views/reset_pass/confirm.php';
+    require 'views/resetPass/confirm.php';
 }, 'get');
 // New password form
-Route::add('/reset_pass', function () {
-    require 'views/reset_pass/reset_pass.php';
+Route::add('/resetpass', function () {
+    require 'views/resetPass/resetPass.php';
 }, 'get');
 // New password post
-Route::add('/reset_pass', function () {
-    require 'api/reset_pass/reset_pass.php';
+Route::add('/resetPass', function () {
+    require 'api/resetPass/resetPass.php';
 }, 'post');
 
 Route::run('/');
