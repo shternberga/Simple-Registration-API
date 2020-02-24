@@ -1,9 +1,3 @@
-<?php
-//make global array variable $_SESSION available
-session_start();
-include_once 'layouts/header.php';
-include_once 'layouts/navbar.php';
-?>
 <div class="container login-container">
     <div class="row">
         <div class="col-md-6 login-form">
@@ -42,6 +36,3 @@ include_once 'layouts/navbar.php';
     }
 </script>
 
-<?php
-include_once 'layouts/footer.php';
-?>

@@ -37,14 +37,6 @@
     </div>
 </div>
 <script>
-    function returnFalse() {
-        return false;
-    }
-
-    function returnTrue() {
-        return true;
-    }
-
     function validateLogin() {
         let valid = true;
         document.getElementById("login_email_info").innerHTML = "";

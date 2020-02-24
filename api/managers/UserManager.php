@@ -13,7 +13,6 @@ class UserManager
     //store new user in the database, create user object if stored successfully
     public function create(array $data): bool
     {
-
         // save data params to simple variables for PDO query
         $name = $data['name'];
         $email = $data['email'];
