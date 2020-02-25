@@ -1,5 +1,5 @@
 <?php
-$redirectLocation = '/resetPass';
+$redirectLocation = '/';
 
 if (!empty($_POST["new_password"])) {
 
@@ -9,6 +9,7 @@ if (!empty($_POST["new_password"])) {
     // save posted data and sanitize it
     $password = htmlspecialchars(strip_tags(trim($_POST['password'])));
     $email = $_SESSION['email'];
+    
     // validate received values
     $validator = new FormValidator();
     $validator->validate([$password], [
@@ -19,18 +20,18 @@ if (!empty($_POST["new_password"])) {
 
         // check email in database
         $userManager = new UserManager($db);
-        if ($user = $userManager->emailExists($email)) {
+        if ($user = $userManager->getUserByEmail($email)) {
 
             // update password
             if ($userManager->resetPassword($password)) {
 
-                //save $ysuser in session
-                $_SESSION['user'] = $userManager->getUser()->name();
+                //save user name in session
+                $_SESSION['user'] = $user->name();
 
                 //send confirmation email
                 (new EmailManager())->send(
                     'lilija@info.lv',
-                    $userManager->getUser()->email(),
+                    $user->email(),
                     'Password reset',
                     'Congratulations, ' . $_SESSION['user'] . ' ! 
                             Your new password is: ' . $password . '.');

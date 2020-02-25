@@ -1,20 +1,20 @@
 <?php
 //save redirect path to new password form
-$redirectLocation = '/resetPass';
+$redirectLocation = '/resetpass';
 
 if (!empty($_GET["token"])) {
-    // make database connection./
+    // make database connection.
     $db = (new Database())->getConnection();
 
     //sanitize data
     $hash = htmlspecialchars(strip_tags(trim($_GET['token'])));
 
-    // check if reset link valid
     $resetLinkManager = new ResetLinkManager($db);
 
-    //validHash() return string with email address
-    $hashEmail = $resetLinkManager->validHash($hash);
-    if ($hashEmail) {
+    $hashEmail = $resetLinkManager->getEmailBy($hash);
+    //check if hash exists and date is valid
+    if ($hashEmail && $resetLinkManager->isValid($hash)) {
+
         $_SESSION['email'] = $hashEmail;
 
     } else {
@@ -27,7 +27,7 @@ if (!empty($_GET["token"])) {
         $_SESSION['errorMessage'] = "Token is not Valid.";
 
         // json message: Token is not valid.
-        echo json_encode(["message" => "Token is not Valid."]);
+        echo json_encode(["message" => $_SESSION['errorMessage']]);
     }
 }
 header('Location: ..' . $redirectLocation);

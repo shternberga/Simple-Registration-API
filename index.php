@@ -38,7 +38,7 @@ Route::add('/signup', function () {
 }, 'get');
 // Sign up post request
 Route::add('/signup', function () {
-    require 'api/auth/signup.php';
+    require 'api/auth/signUp.php';
 }, 'post');
 // Only for registered users
 Route::add('/notforall', function () {
@@ -69,7 +69,7 @@ Route::add('/resetpass', function () {
     require 'views/resetPass/resetPass.php';
 }, 'get');
 // New password post
-Route::add('/resetPass', function () {
+Route::add('/resetpass', function () {
     require 'api/resetPass/resetPass.php';
 }, 'post');
 

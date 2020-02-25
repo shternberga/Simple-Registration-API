@@ -43,8 +43,23 @@ class UserManager
         return false;
     }
 
-    // check if given email exist in the database, create user object if exists
+    // check if given email exist in the database
     public function emailExists(string $email): bool
+    {
+        $stmt = $this->db->prepare("SELECT email FROM user WHERE email = '$email'");
+        $stmt->bindValue( 1, $email );
+        $stmt->execute();
+
+        // if email found return true
+        if( $stmt->rowCount() > 0 ) {
+            $_SESSION['_response_message'] = 'Email exists.';
+            return true;
+        }
+        // return false if email was not found in the database
+        return false;
+    }
+    
+    public function getUser(string $email, string $password): ?object
     {
         $stmt = $this->db->prepare("SELECT * FROM user WHERE email = '$email'");
         $stmt->execute();
@@ -52,22 +67,36 @@ class UserManager
         // get user from database
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // if user found return true and add username to Session
-        if ($user) {
-            $this->user = new User($user['id'], $user['name'], $user['email'], $user['password']);
-            $_SESSION['_response_message'] = 'User email exists.';
-            return true;
+        // if password is correct return user object
+        if (password_verify($password, $user['password'])) {
+            $this->user = new User(
+                $user['id'], 
+                $user['name'], 
+                $user['email'], 
+                $user['password']
+            );
+            return $this->user;
         }
-
-        // return false if user was not found in the database
-        return false;
+        // return null if user was not found in the database or wrong password
+        return null;        
     }
-
-    public function getUser(): ?object
+    
+    public function getUserByEmail(string $email): ?object
     {
-        return $this->user;
+        $stmt = $this->db->prepare("SELECT * FROM user WHERE email = '$email'");
+        if ($stmt->execute()) {
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            $this->user = new User(
+                $user['id'], 
+                $user['name'], 
+                $user['email'], 
+                $user['password']
+            );
+            return $this->user;
+        }
+        return null;
     }
-
+    
     public function resetPassword(string $password): bool
     {
         //hash password for correct storage in DB

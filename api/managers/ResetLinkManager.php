@@ -46,8 +46,26 @@ class ResetLinkManager
         return false;
     }
 
-    // check if given hash exist in the database, check created_at value, return email
-    public function validHash(string $hash): string
+    // return email
+    public function getEmailBy(string $hash): ?string
+    {
+
+        $stmt = $this->db->prepare("SELECT * FROM resets WHERE hash = '$hash'");
+        $stmt->execute();
+
+        // get reset link info from database
+        $reset = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($reset) {
+            return $reset['email'];
+        }
+
+        // return null if reset link was not found
+        return null;
+    }
+
+    // check created_at value
+    public function isValid(string $hash): bool
     {
 
         $stmt = $this->db->prepare("SELECT * FROM resets WHERE hash = '$hash'");
@@ -60,10 +78,10 @@ class ResetLinkManager
         if ($reset) {
             $exp_date = strtotime($reset['created_at']);
             if ((time() - $exp_date) <= 3600)
-                return $reset['email'];
+                return true;
         }
 
-        // return empty string if reset link expired
-        return '';
+        // return false if reset link expired
+        return false;
     }
 }
