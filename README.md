@@ -57,16 +57,27 @@ create table resets
 );
 ```
 
-> add Your database connection variables into config/database.php file
+> add Your database connection variables into config/databaseConfigs.php file
 
 ```shell
-    private $host = "localhost";
-    private $db_name = "yourDB";
-    private $username = "yourUserName";
-    private $password = "yourPassword";
+    'host' => 'localhost',
+    'username' => 'root',
+    'password' => 'password',
+    'db_name' => 'your_db',
 ```
 ---
 
+
+> add Your SMTP Server connection variables into config/smtpServerConfigs.php file
+
+```shell
+define('SMTP_AUTH', true);
+define('SMTP_USER', 'your_username');
+define('SMTP_PASSWORD', 'your_password');
+define('SMTP_HOST', 'smtp.mailtrap.io');
+define('SMTP_PORT', 'your_port');
+```
+---
 
 > and just type 
 
