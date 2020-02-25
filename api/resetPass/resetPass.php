@@ -30,7 +30,7 @@ if (!empty($_POST["new_password"])) {
 
                 //send confirmation email
                 (new EmailManager())->send(
-                    'lilija@info.lv',
+                    MYAPP_EMAIL,
                     $user->email(),
                     'Password reset',
                     'Congratulations, ' . $_SESSION['user'] . ' ! 

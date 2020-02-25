@@ -4,6 +4,8 @@ session_start();
 include_once 'views/layouts/header.php';
 include_once 'views/layouts/navbar.php';
 include('Route.php');
+include './config/smtpServerConfigs.php';
+include './config/appConfigs.php';
 include './config/database.php';
 include 'api/managers/UserManager.php';
 include 'api/managers/EmailManager.php';

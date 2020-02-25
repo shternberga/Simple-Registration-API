@@ -35,7 +35,7 @@ if (!empty($_POST["sign_up"])) {
 
                 //send confirmation email
                 (new EmailManager())->send(
-                    'lilija@info.lv',
+                    MYAPP_EMAIL,
                     $data['email'],
                     'Successful registration',
                     'Welcome, ' . $_SESSION['user'] . ' !');
