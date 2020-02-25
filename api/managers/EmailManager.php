@@ -9,16 +9,16 @@ class EmailManager
     public function send(string $from, string $to, string $subject, string $message): bool
     {
         $mail = new PHPMailer(true);
-
+        
         try {
             $mail->isSMTP();
-            $mail->Host = 'smtp.mailtrap.io';  //mailtrap SMTP server
-            $mail->SMTPAuth = true;
-            $mail->Username = 'fe96d7679427ff';   //username
-            $mail->Password = '64a1dfe2642dd8';   //password
-            $mail->Port = 2525;                    //smtp port
+            $mail->Host = SMTP_HOST;
+            $mail->SMTPAuth = SMTP_AUTH;
+            $mail->Username = SMTP_USER; 
+            $mail->Password = SMTP_PASSWORD;
+            $mail->Port = SMTP_PORT; 
 
-            $mail->setFrom($from, 'Awesome app');
+            $mail->setFrom($from, MYAPP_NAME);
             $mail->addAddress($to);
 
             $mail->isHTML(true);

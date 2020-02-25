@@ -26,7 +26,7 @@ if (isset($_POST['reset-password'])) {
             $token = bin2hex(random_bytes(50));
 
             if ((new EmailManager())->send(
-                    'lilija@info.lv',
+                    MYAPP_EMAIL,
                     $email,
                     'Reset your password link.',
                     "Hi there, click on this 
