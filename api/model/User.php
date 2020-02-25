@@ -4,10 +4,10 @@
 class User
 {
     // user properties
-    public $id;
-    public $name;
-    public $email;
-    public $password;
+    private $id;
+    private $name;
+    private $email;
+    private $password;
 
     // User class constructor
     public function __construct(int $id, string $name, string $email, string $password)

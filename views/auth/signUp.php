@@ -2,12 +2,12 @@
     <div class="row">
         <div class="col-md-6 login-form">
             <!-- form error messages -->
-            <?php if ($_SESSION["errorMessage"]): ?>
+            <?php if ($_SESSION["_response_message"]): ?>
                 <p class="alert alert-warning" role="alert">
-                    <?php echo $_SESSION["errorMessage"] ?>
+                    <?php echo $_SESSION["_response_message"] ?>
                     Try again!</p>
             <?php endif;
-            unset($_SESSION["errorMessage"]); ?>
+            unset($_SESSION["_response_message"]); ?>
             <div class="login-logo">
                 <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
             </div>

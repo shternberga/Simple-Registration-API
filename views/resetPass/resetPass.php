@@ -9,7 +9,7 @@
 <div class="container login-container">
     <div class="row">
         <div class="col-md-6 login-form">
-            <form class="login-form" action="/resetPass" method="post" onSubmit="return validatePasswords();">
+            <form class="login-form" action="/resetpass" method="post" onSubmit="return validatePasswords();">
                 <h2 class="form-title">New password</h2>
                 <!-- form error messages -->
                 <?php if ($_SESSION["errorMessage"]): ?>

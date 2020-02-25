@@ -19,14 +19,10 @@ if (!empty($_POST["login"])) {
 
     if ($validator->passed()) {
 
-        $userManager = new UserManager($db);
-
-        // check user if exists and if exists verify password
-        if ($userManager->getUser($email) &&
-            password_verify(strip_tags($password), $userManager->getUser()->password())) {
-
-            //save user email and name to session
-            $_SESSION['user'] = $userManager->getUser()->name();
+        // check user if exists
+        if ($user = (new UserManager($db))->getUser($email, $password)) {
+            //save user name to session
+            $_SESSION['user'] = $user->name();
 
             // set response code
             http_response_code(200);
@@ -35,7 +31,9 @@ if (!empty($_POST["login"])) {
             echo json_encode(["message" => "You are logged in."]);
 
             $redirectLocation = '/';
-        } // message if unable to login
+        } 
+        
+        // message if user was not found in DB
         else {
             $_SESSION['errorMessage'] = "Email or password are incorrect";
 
@@ -45,6 +43,8 @@ if (!empty($_POST["login"])) {
             // json message: Email or password are incorrect
             echo json_encode(["message" => $_SESSION['errorMessage']]);
         }
+        
+        //if validator failed
     } else {
         $_SESSION['errorMessage'] = "The parameters passed were invalid.";
 
